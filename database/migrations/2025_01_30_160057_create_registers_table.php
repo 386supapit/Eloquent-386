@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('registers', function (Blueprint $table) {
             $table->id();
+            $table->timestamp('registered_at')->nullable(); // วันที่ลงทะเบียน
+            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending'); // สถานะ
+            $table->boolean('fee_paid')->default(false); // สถานะการจ่ายเงิน
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
             $table->timestamps();

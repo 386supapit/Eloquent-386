@@ -17,6 +17,9 @@
                 <tr>
                     <th class="border px-4 py-2">Student Name</th>
                     <th class="border px-4 py-2">Course Title</th>
+                    <th class="border px-4 py-2">Registered Date</th>
+                    <th class="border px-4 py-2">Status</th>
+                    <th class="border px-4 py-2">Fee Paid</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +31,15 @@
                             {{ $register->courses->title }}
                         @else
                             ไม่มีข้อมูลคอร์ส
+                        @endif
+                    </td>
+                    <td class="border px-4 py-2">{{ $register->registered_at ?? 'N/A' }}</td> <!-- วันที่ลงทะเบียน -->
+                    <td class="border px-4 py-2">{{ ucfirst($register->status) }}</td> <!-- สถานะ -->
+                    <td class="border px-4 py-2">
+                        @if($register->fee_paid)
+                            ✅ จ่ายแล้ว
+                        @else
+                            ❌ ยังไม่จ่าย
                         @endif
                     </td>
                 </tr>

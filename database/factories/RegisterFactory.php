@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Register;
 use App\Models\Student;
 use App\Models\Courses;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,8 +23,11 @@ class RegisterFactory extends Factory
     public function definition()
     {
         return [
-            'student_id' => Student::factory(),  // Creates a related Student via StudentFactory
-            'course_id' => Courses::factory(),    // Creates a related Course via CourseFactory
+            'student_id' => Student::factory(),  // สร้าง Student ใหม่อัตโนมัติ
+            'course_id' => Courses::factory(),   // สร้าง Course ใหม่อัตโนมัติ
+            'registered_at' => Carbon::now(), // ใช้วันที่ปัจจุบันเป็นวันลงทะเบียน
+            'status' => $this->faker->randomElement(['pending', 'confirmed', 'cancelled']), // สุ่มสถานะ
+            'fee_paid' => $this->faker->boolean(80), // 80% โอกาสเป็น true (จ่ายเงินแล้ว)
         ];
     }
 }
